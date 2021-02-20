@@ -1,0 +1,11 @@
+FROM node
+
+MAINTAINER devops0123@gmail.com
+
+WORKDIR /app/backend
+
+ADD backend/* ./
+
+RUN npm install & npm run build
+
+CMD [ "start" ]

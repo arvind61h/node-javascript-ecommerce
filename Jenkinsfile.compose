@@ -1,0 +1,15 @@
+pipeline{
+    agent {label 'deploymentServer'}
+    stages{
+        stage('scm'){
+            steps{
+                git 'https://github.com/arvind61h/node-javascript-ecommerce.git'
+            }
+        }
+        stage('deploy-service'){
+            steps{
+                sh 'docker-compose up'
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+FROM node
+
+#creator of this image
+MAINTAINER devops0123@gmail.com
+
+#change working dir if not create and change dir
+WORKDIR /app/frontend
+
+ADD frontend/* ./
+
+RUN npm install
+
+EXPOSE 8080
+
+CMD [ "start" ]

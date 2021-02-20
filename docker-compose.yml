@@ -1,0 +1,47 @@
+version: '3.2'
+services:
+  frontend:
+    image: 92840/front:v${def buildNumber = Jenkins.instance.getItem('ecomorce-dev-build').lastSuccessfulBuild.number}
+    networks:
+    - web
+    ports:
+    - 8080:8080
+    depends_on:
+    - backend
+    hostname: backend
+  backend:
+    image: 92840/back:v${def buildNumber = Jenkins.instance.getItem('ecomorce-dev-build').lastSuccessfulBuild.number}
+    networks:
+    - web
+    ports:
+    - 5000:5000
+    environment:
+    - JWT_SECRET=admin
+    - PAYPAL_CLIENT_ID=db
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=adam
+    - MONGO_DB_PASSWORD=adam123
+    depends_on:
+    - mongo
+  mongo:
+    image: mongo
+    networks:
+    - web
+    ports:
+    - 5000:5000
+    volumes:
+    - mymongo:/data/db
+    environment:
+    - JWT_SECRET=admin
+    - PAYPAL_CLIENT_ID=db
+    - MONGO_INITDB_ROOT_USERNAME=adam
+    - MONGO_INITDB_ROOT_PASSWORD=adam123
+volumes:
+  mymongo:
+    driver: local
+networks:
+  web:
+    driver: bridge
+
+
+
