@@ -6,6 +6,6 @@ WORKDIR /app/backend
 
 ADD backend/* ./
 
-RUN npm install & npm run build
+RUN npm install
 
 CMD [ "start" ]
