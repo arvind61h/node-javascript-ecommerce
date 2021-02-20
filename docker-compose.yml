@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   frontend:
-    image: 92840/front:v${def buildNumber = Jenkins.instance.getItem('ecomorce-dev-build').lastSuccessfulBuild.number}
+    image: 92840/front:v15
     networks:
     - web
     ports:
@@ -10,7 +10,7 @@ services:
     - backend
     hostname: backend
   backend:
-    image: 92840/back:v${def buildNumber = Jenkins.instance.getItem('ecomorce-dev-build').lastSuccessfulBuild.number}
+    image: 92840/back:v15
     networks:
     - web
     ports:
